@@ -1,0 +1,18 @@
+# Node modules
+/node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment variables
+backend/.env
+frontend/.env
+
+# Build directories
+frontend/build
+backend/dist
+
+# Miscellaneous
+.DS_Store
