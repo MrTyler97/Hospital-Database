@@ -1,5 +1,5 @@
 # Node modules
-/node_modules
+backend/node_modules
 
 # Logs
 logs
@@ -7,7 +7,7 @@ logs
 npm-debug.log*
 
 # Environment variables
-backend/.env
+backend/src/.env
 frontend/.env
 
 # Build directories
