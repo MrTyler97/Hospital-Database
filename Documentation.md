@@ -18,3 +18,7 @@ npx create-react-app frontend --template typescript:
 
 npm install axios:
 Axios - Makes it easier to perform HTTP requests to interact with APIs.
+
+npm install react-router-dom @types/react-router-dom
+
+- Switching between pages Login and Dashboard
