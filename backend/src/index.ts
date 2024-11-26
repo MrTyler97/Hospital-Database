@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 
 // Retrieve the port number from the enviorment variable
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 
 // Use CORS middleware
 app.use(cors());
@@ -34,7 +34,7 @@ try {
     // Goes through rows of User table and get the email and password
     const [rows]: any = await pool.query(`
         SELECT * 
-        FROM users 
+        FROM user_account 
         WHERE email = ?
         `, [email]
         );
