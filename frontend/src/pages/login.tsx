@@ -11,6 +11,7 @@ const Login: React.FC = () => {
     try {
       const data = await login(email, password);
       localStorage.setItem("user_id", data.user_id);
+      localStorage.setItem("email", email);
       window.location.href = "/dashboard";
     } catch (error: any) {
       alert(error.response?.data?.error || "Login failed");
