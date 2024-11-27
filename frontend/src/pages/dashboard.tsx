@@ -80,12 +80,21 @@ const Dashboard: React.FC = () => {
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
+  const handleLogout = () => {
+    // Clear stored data
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("email");
+    localStorage.removeItem("role");
+    // Redirect to login page
+    window.location.href = "/login";
+  };
+
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         const email = localStorage.getItem("email");
         if (!email) {
-          alert("No email found. Please log in again.");
+          console.warn("No email found. Please log in again.");
           window.location.href = "/login";
           return;
         }
@@ -127,6 +136,7 @@ const Dashboard: React.FC = () => {
   return (
     <div>
       <h1>Dashboard</h1>
+      <button onClick={handleLogout}>Logout</button>
       {role === "patient" && (
         <PatientDashboard
           patientData={userData.patient}
