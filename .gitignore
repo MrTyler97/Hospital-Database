@@ -17,3 +17,4 @@ backend/dist
 .DS_Store
 backend/src/.env
 backend/src/.env
+frontend/public  
