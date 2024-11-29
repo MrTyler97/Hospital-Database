@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { login } from "../api/api";
+import style from "./login.module.css";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -19,26 +20,32 @@ const Login: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2> Login </h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <br />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <br />
-      <button type="submit">Login</button>
-    </form>
+    <div className={style.container}>
+      <h2 className={style.heading}> Login </h2>
+      <form onSubmit={handleLogin}>
+        <input
+          className={style.input}
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          className={style.input}
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <br />
+        <button className={style.button} type="submit">
+          Login
+        </button>
+      </form>
+    </div>
   );
 };
 
