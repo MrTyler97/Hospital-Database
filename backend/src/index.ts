@@ -74,7 +74,9 @@ app.post('/dashboard', async (req, res) => {
       // Fetch user data
       const [userRows]: any = await pool.query(
         `
-        SELECT * FROM user_account WHERE email = ?
+        SELECT * 
+        FROM user_account 
+        WHERE email = ?
       `,
         [email]
       );
@@ -85,7 +87,8 @@ app.post('/dashboard', async (req, res) => {
       const user = userRows[0];
       const user_id = user.user_id;
       const role = user.role;
-  
+
+      // Switch cases for different roles
       switch (role) {
         case 'patient': {
           // Get patient data
@@ -106,7 +109,9 @@ app.post('/dashboard', async (req, res) => {
           // Get records for the patient
           const [recordRows]: any = await pool.query(
             `
-            SELECT * FROM record WHERE patient_id = ?
+            SELECT * 
+            FROM record 
+            WHERE patient_id = ?
           `,
             [patient_id]
           );

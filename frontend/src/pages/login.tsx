@@ -21,7 +21,7 @@ const Login: React.FC = () => {
 
   return (
     <div className={style.container}>
-      <h2 className={style.heading}> Login </h2>
+      <h2 className={style.heading}> Diallo Lemont Hospital </h2>
       <form onSubmit={handleLogin}>
         <input
           className={style.input}

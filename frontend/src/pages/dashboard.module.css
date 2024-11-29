@@ -1,0 +1,89 @@
+/* dashboard.module.css */
+
+.container {
+    margin: 50px auto;
+    padding: 1rem;
+    background-color: transparent; /* Transparent to expose background */
+    width: 100%; /* Full width */
+  }
+  
+  .heading {
+    font-family: 'Copperplate', fantasy;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ffffff; /* Adjust for contrast with background */
+  }
+  
+  .subheading {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333333;
+  }
+  
+  .button {
+    padding: 0.75rem;
+    background: linear-gradient(#2a00b7, #42006C);
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .buttoncontainer {
+    text-align: center;
+  }
+
+  .button:hover {
+    background-color: #1565c0;
+  }
+  
+  .sectionContainer {
+    max-height: 300px; /* Adjust as needed */
+    overflow-y: auto; /* Scrollable content */
+    margin: 20px auto;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent */
+    border-radius: 8px;
+    width: 80%; /* Adjust to expose more background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .recordList,
+  .patientList,
+  .billingList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .listItem {
+    padding: 1rem;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .listItem:last-child {
+    border-bottom: none;
+  }
+  
+  /* Scrollbar styling */
+  .sectionContainer::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .sectionContainer::-webkit-scrollbar-thumb {
+    background-color: #cccccc;
+    border-radius: 4px;
+  }
+  
+  .sectionContainer::-webkit-scrollbar-thumb:hover {
+    background-color: #aaaaaa;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .sectionContainer {
+      width: 95%;
+    }
+  }
+  

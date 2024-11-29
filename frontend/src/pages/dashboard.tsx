@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getDashboardData } from "../api/api";
+import style from "./dashboard.module.css";
 
 interface Patient {
   patient_id: number;
@@ -134,9 +135,8 @@ const Dashboard: React.FC = () => {
 
   // Render the dashboard based on the user role
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <div className={style.container}>
+      <h1 className={style.heading}>Dashboard</h1>
       {role === "patient" && (
         <PatientDashboard
           patientData={userData.patient}
@@ -174,6 +174,11 @@ const Dashboard: React.FC = () => {
           <p>Admin functionalities are not implemented yet.</p>
         </div>
       )}
+      <div className={style.buttoncontainer}>
+        <button className={style.button} onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
     </div>
   );
 };
@@ -185,22 +190,27 @@ const PatientDashboard: React.FC<{
 }> = ({ patientData, records }) => {
   return (
     <div>
-      <h2>Welcome, {patientData.name}</h2>
-      <p>Age: {patientData.age}</p>
-      {/* Display other patient details as needed */}
-      <h3>Your Medical Records:</h3>
-      {records.length > 0 ? (
-        <ul>
-          {records.map((record) => (
-            <li key={record.record_id}>
-              <p>Diagnosis: {record.diagnosis}</p>
-              {/* Display other record details as needed */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No medical records found.</p>
-      )}
+      <div className={style.sectionContainer}>
+        <h2 className={style.subheading}>Welcome, {patientData.name}</h2>
+        <p>Age: {patientData.age}</p>
+        {/* add insurance provider */}
+      </div>
+      <div className={style.sectionContainer}>
+        <h3 className={style.subheading}>Your Medical Records:</h3>
+        {records.length > 0 ? (
+          <ul className={style.recordlist}>
+            {records.map((record) => (
+              <li key={record.record_id} className={style.listitem}>
+                <p>Diagnosis: {record.diagnosis}</p>
+                <p>Room Number: {record.room_number}</p>
+                {/* add insurance provider, Doctor Name, Nurse Name */}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No medical records found.</p>
+        )}
+      </div>
     </div>
   );
 };
@@ -213,37 +223,43 @@ const DoctorDashboard: React.FC<{
 }> = ({ doctorData, employeeData, patients, records }) => {
   return (
     <div>
-      <h2>Welcome, Dr. {doctorData.name}</h2>
-      <p>Specialty: {doctorData.specialty}</p>
-      <p>Age: {doctorData.age}</p>
-      <p>Salary: ${employeeData.salary}</p>
-      {/* Display other doctor and employee details as needed */}
-      <h3>Your Patients:</h3>
-      {patients.length > 0 ? (
-        <ul>
-          {patients.map((patient) => (
-            <li key={patient.patient_id}>
-              {patient.name} (Age: {patient.age})
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No patients assigned.</p>
-      )}
-      <h3>Your Medical Records:</h3>
-      {records.length > 0 ? (
-        <ul>
-          {records.map((record) => (
-            <li key={record.record_id}>
-              <p>Patient ID: {record.patient_id}</p>
-              <p>Diagnosis: {record.diagnosis}</p>
-              {/* Display other record details as needed */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No medical records found.</p>
-      )}
+      <div className={style.sectionContainer}>
+        <h2 className={style.subheading}> Welcome, {doctorData.name}</h2>
+        <p>Specialty: {doctorData.specialty}</p>
+        <p>Age: {doctorData.age}</p>
+        <p>Salary: ${employeeData.salary}</p>
+        {/* Display other doctor and employee details as needed */}
+      </div>
+      <div className={style.sectionContainer}>
+        <h3 className={style.subheading}>Your Patients:</h3>
+        {patients.length > 0 ? (
+          <ul className={style.patientlist}>
+            {patients.map((patient) => (
+              <li key={patient.patient_id} className={style.listitem}>
+                {patient.name} (Age: {patient.age})
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No patients assigned.</p>
+        )}
+      </div>
+      <div className={style.sectionContainer}>
+        <h3 className={style.subheading}>Your Medical Records:</h3>
+        {records.length > 0 ? (
+          <ul className={style.recordlist}>
+            {records.map((record) => (
+              <li key={record.record_id} className={style.listitem}>
+                <p>Patient ID: {record.patient_id}</p>
+                <p>Diagnosis: {record.diagnosis}</p>
+                {/* Display other record details as needed */}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No medical records found.</p>
+        )}
+      </div>
     </div>
   );
 };
@@ -256,36 +272,42 @@ const NurseDashboard: React.FC<{
 }> = ({ nurseData, employeeData, patients, records }) => {
   return (
     <div>
-      <h2>Welcome, {nurseData.name}</h2>
-      <p>Age: {nurseData.age}</p>
-      <p>Salary: ${employeeData.salary}</p>
-      {/* Display other nurse and employee details as needed */}
-      <h3>Your Patients:</h3>
-      {patients.length > 0 ? (
-        <ul>
-          {patients.map((patient) => (
-            <li key={patient.patient_id}>
-              {patient.name} (Age: {patient.age})
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No patients assigned.</p>
-      )}
-      <h3>Your Medical Records:</h3>
-      {records.length > 0 ? (
-        <ul>
-          {records.map((record) => (
-            <li key={record.record_id}>
-              <p>Patient ID: {record.patient_id}</p>
-              <p>Diagnosis: {record.diagnosis}</p>
-              {/* Display other record details as needed */}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No medical records found.</p>
-      )}
+      <div className={style.sectionContainer}>
+        <h2 className={style.subheading}>Welcome, {nurseData.name}</h2>
+        <p>Age: {nurseData.age}</p>
+        <p>Salary: ${employeeData.salary}</p>
+        {/* Display other nurse and employee details as needed */}
+      </div>
+      <div className={style.sectionContainer}>
+        <h3 className={style.subheading}>Your Patients:</h3>
+        {patients.length > 0 ? (
+          <ul className={style.patientlist}>
+            {patients.map((patient) => (
+              <li key={patient.patient_id} className={style.listitem}>
+                {patient.name} (Age: {patient.age})
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No patients assigned.</p>
+        )}
+      </div>
+      <div className={style.sectionContainer}>
+        <h3 className={style.subheading}>Your Medical Records:</h3>
+        {records.length > 0 ? (
+          <ul className={style.recordlist}>
+            {records.map((record) => (
+              <li key={record.record_id} className={style.listitem}>
+                <p>Patient ID: {record.patient_id}</p>
+                <p>Diagnosis: {record.diagnosis}</p>
+                {/* Display other record details as needed */}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No medical records found.</p>
+        )}
+      </div>
     </div>
   );
 };
@@ -305,56 +327,62 @@ const FrontDeskDashboard: React.FC<{
 }) => {
   return (
     <div>
-      <h2>Welcome, {frontDeskData.name}</h2>
-      <p>Age: {frontDeskData.age}</p>
-      <p>Salary: ${employeeData.salary}</p>
-      {/* Display other front desk and employee details as needed */}
-      <h3>Billing Records:</h3>
-      {billing.length > 0 ? (
-        <ul>
-          {billing.map((bill) => (
-            <li key={bill.billing_id}>
-              <p>Billing ID: {bill.billing_id}</p>
-              <p>Patient ID: {bill.patient_id}</p>
-              <p>Total Amount: ${bill.total_amount}</p>
-              <p>
-                Amount Covered by Insurance: ${bill.amount_covered_by_insurance}
-              </p>
-              <p>Amount Due: ${bill.amount_due}</p>
-              <p>
-                Billing Date: {new Date(bill.billing_date).toLocaleDateString()}
-              </p>
-              {/* Find and display related billing items */}
-              <h4>Billing Items:</h4>
-              <ul>
-                {billingItems
-                  .filter((item) => item.billing_id === bill.billing_id)
-                  .map((item) => (
-                    <li key={item.bill_item_id}>
-                      <p>Description: {item.description}</p>
-                      <p>Quantity: {item.quantity}</p>
-                      <p>Unit Price: ${item.unit_price}</p>
-                      <p>Total Price: ${item.total_price}</p>
-                    </li>
+      <div className={style.sectionContainer}>
+        <h2 className={style.subheading}>Welcome, {frontDeskData.name}</h2>
+        <p>Age: {frontDeskData.age}</p>
+        <p>Salary: ${employeeData.salary}</p>
+        {/* Display other front desk and employee details as needed */}
+      </div>
+      <div className={style.sectionContainer}>
+        <h3 className={style.subheading}>Billing Records:</h3>
+        {billing.length > 0 ? (
+          <ul className={style.billinglist}>
+            {billing.map((bill) => (
+              <li key={bill.billing_id} className={style.listitem}>
+                <p>Billing ID: {bill.billing_id}</p>
+                <p>Patient ID: {bill.patient_id}</p>
+                <p>Total Amount: ${bill.total_amount}</p>
+                <p>
+                  Amount Covered by Insurance: $
+                  {bill.amount_covered_by_insurance}
+                </p>
+                <p>Amount Due: ${bill.amount_due}</p>
+                <p>
+                  Billing Date:{" "}
+                  {new Date(bill.billing_date).toLocaleDateString()}
+                </p>
+                {/* Find and display related billing items */}
+                <h4>Billing Items:</h4>
+                <ul className={style.recordlist}>
+                  {billingItems
+                    .filter((item) => item.billing_id === bill.billing_id)
+                    .map((item) => (
+                      <li key={item.bill_item_id} className={style.listitem}>
+                        <p>Description: {item.description}</p>
+                        <p>Quantity: {item.quantity}</p>
+                        <p>Unit Price: ${item.unit_price}</p>
+                        <p>Total Price: ${item.total_price}</p>
+                      </li>
+                    ))}
+                </ul>
+                {/* Display insurance provider information */}
+                {insuranceProviders
+                  .filter(
+                    (provider) =>
+                      provider.provider_id === bill.insurance_provider_id
+                  )
+                  .map((provider) => (
+                    <p key={provider.provider_id}>
+                      Insurance Provider: {provider.name}
+                    </p>
                   ))}
-              </ul>
-              {/* Display insurance provider information */}
-              {insuranceProviders
-                .filter(
-                  (provider) =>
-                    provider.provider_id === bill.insurance_provider_id
-                )
-                .map((provider) => (
-                  <p key={provider.provider_id}>
-                    Insurance Provider: {provider.name}
-                  </p>
-                ))}
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No billing records found.</p>
-      )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No billing records found.</p>
+        )}
+      </div>
     </div>
   );
 };
